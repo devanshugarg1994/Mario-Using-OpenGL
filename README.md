@@ -8,4 +8,4 @@ SetUp the project and created GLFW window
 
 
 [Delta Time and Basic Scene Manager](../../tree/2af5f87b011119a967edb8dc54ce9008630ae12f)</br>
-SetUp the project and created GLFW window.
+Added Time class which give as the time differnce from now to the apllication started. Also setUp a Scene and add ome functionality to chnage between 2 scene
