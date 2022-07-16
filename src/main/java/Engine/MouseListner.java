@@ -28,67 +28,67 @@ public class MouseListner {
     }
 
     public static void mousePositionCallback(long window, double xpos, double ypos) {
-        get().lastX = get().xPos;
-        get().lastY = get().yPos;
-        get().xPos = xpos;
-        get().yPos = ypos;
-        get().isDragging = get().mouseButtonPressed[0] || get().mouseButtonPressed[1] || get().mouseButtonPressed[2];
+        MouseListner.get().lastX =  MouseListner.get().xPos;
+        MouseListner.get().lastY =  MouseListner.get().yPos;
+        MouseListner.get().xPos = xpos;
+        MouseListner.get().yPos = ypos;
+        MouseListner.get().isDragging =  MouseListner.get().mouseButtonPressed[0] ||  MouseListner.get().mouseButtonPressed[1] ||  MouseListner.get().mouseButtonPressed[2];
     }
 
     // @modifier : check combination like ctrl + "click"
     public static void mouseButtonCallback(long window, int button , int action, int modifier) {
-        if(get().mouseButtonPressed.length > action) {
+        if( MouseListner.get().mouseButtonPressed.length > action) {
             if(action == GLFW_PRESS) {
-                get().mouseButtonPressed[button] = true;
+                 MouseListner.get().mouseButtonPressed[button] = true;
             } else if(action == GLFW_RELEASE) {
-                get().mouseButtonPressed[button] = false;
-                get().isDragging = false;
+                 MouseListner.get().mouseButtonPressed[button] = false;
+                 MouseListner.get().isDragging = false;
             }
         }
     }
 
     public static void mouseScrollCallback(long window, double scrollx, double scrolly) {
-        get().scrollX = scrollx;
-        get().scrollY = scrolly;
+         MouseListner.get().scrollX = scrollx;
+         MouseListner.get().scrollY = scrolly;
     }
 
     public static void endFrame() {
-        get().scrollX = 0;
-        get().scrollY = 0;
-        get().lastX = get().xPos;
-        get().lastY = get().yPos;
-//        get().xPos = 0;
-//        get().yPos = 0;
+         MouseListner.get().scrollX = 0;
+         MouseListner.get().scrollY = 0;
+         MouseListner.get().lastX =  MouseListner.get().xPos;
+         MouseListner.get().lastY =  MouseListner.get().yPos;
+//         MouseListner.get().xPos = 0;
+//         MouseListner.get().yPos = 0;
     }
 
     public static float getPosX() {
-        return (float)get().xPos;
+        return (float) MouseListner.get().xPos;
     }
     public static float getPosY() {
-        return (float)get().yPos;
+        return (float) MouseListner.get().yPos;
     }
     public static float getDx() {
-        return (float)(get().lastX - get().xPos);
+        return (float)( MouseListner.get().lastX -  MouseListner.get().xPos);
     }
     public static float getDy() {
-        return (float) (get().lastY - get().yPos);
+        return (float) ( MouseListner.get().lastY - MouseListner.get().yPos);
     }
 
     public static float getScrollX() {
-        return (float) (get().scrollX);
+        return (float) ( MouseListner.get().scrollX);
     }
 
     public static float getScrollY() {
-        return (float) (get().scrollY);
+        return (float) ( MouseListner.get().scrollY);
     }
 
     public static boolean getIsDragging() {
-        return (get().isDragging);
+        return ( MouseListner.get().isDragging);
     }
 
     public static boolean getMouseButtonPressed(int button) {
-        if(button < get().mouseButtonPressed.length) {
-          return get().mouseButtonPressed[button];
+        if(button <  MouseListner.get().mouseButtonPressed.length) {
+          return  MouseListner.get().mouseButtonPressed[button];
         } else  {
             return false;
         }
