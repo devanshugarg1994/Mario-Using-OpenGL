@@ -11,5 +11,5 @@ Set up the project and created GLFW window
 Added Time class which give as the time difference from now to the application started. Also set up a Scene and add ome functionality to change between 2
 </br>
 </br>
-[ Draw a Square Using OpenGL](../../tree/234ac52019dc52a873c14358eae880d64cfa698a)
+[ Draw a Square Using OpenGL](../../tree/234ac52019dc52a873c14358eae880d64cfa698a)</br>
 Created vab, vbo, ebo and render a square on the widow screen
