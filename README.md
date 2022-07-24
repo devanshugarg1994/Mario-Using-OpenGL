@@ -20,4 +20,7 @@ Created a Shader Class where we read and parse the `GLSL` code and break it down
 </br>
 </br>
 [Added Camera class which is using orthographic projection](../../tree/7a10a4e85091da762c11ed497632337b5f618c2c)</br>
-Added a camera class here we are setting the projection as `orthographic` view, using `lookAt` function
+Added a camera class here we are setting the projection as `orthographic` view, using `lookAt` function</br>
+</br>
+[Added More Uniform type and trying adding noise in Shaders](../../tree/3ebe7956d3f16905a3efdfa38b58fdf5cffde746)</br>
+Added for uniform type and play around shader GLSL code.
