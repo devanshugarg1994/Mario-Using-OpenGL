@@ -3,6 +3,7 @@ package Engine;
 import org.joml.Vector2f;
 import org.lwjgl.BufferUtils;
 import renderer.Shader;
+import util.Time;
 
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
@@ -89,6 +90,7 @@ public class LevelEditorScene extends Scene {
         this.defaultShader.use();
         this.defaultShader.uploadUniformMat4("uProjection", this.camera.getProjectionMatrix());
         this.defaultShader.uploadUniformMat4("uView", this.camera.getViewMatrix());
+        this.defaultShader.uploadUniformFloat("uTime", Time.getTime());
         glBindVertexArray(this.vaoID);
         glEnableVertexAttribArray(0);
         glEnableVertexAttribArray(1);
