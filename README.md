@@ -12,7 +12,12 @@ Added Time class which give as the time difference from now to the application s
 </br>
 </br>
 [ Draw a Square Using OpenGL](../../tree/234ac52019dc52a873c14358eae880d64cfa698a)</br>
-Created vab, vbo, ebo and render a square on the widow screen</br>
+Created vab, vbo, ebo and render a square on the widow screen.
+</br>
 </br>
 [Abstracting Shader string to a file and parsing it from file](../../tree/d7d3181fc345353d3c61cc54ff06bc2c5d33ff83)</br>
-Created a Shader Class where we read and parse the `GLSL` code and break it down to vertex and fragment shader.We are compiling and Linking the shader program as well
+Created a Shader Class where we read and parse the `GLSL` code and break it down to vertex and fragment shader.We are compiling and Linking the shader program as well.
+</br>
+</br>
+[Added Camera class which is using orthographic projection](../../tree/7a10a4e85091da762c11ed497632337b5f618c2c)</br>
+Added a camera class here we are setting the projection as `orthographic` view, using `lookAt` function
