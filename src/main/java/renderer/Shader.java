@@ -1,7 +1,11 @@
 package renderer;
 
+import org.joml.Matrix4f;
+import org.lwjgl.BufferUtils;
+
 import javax.xml.transform.Source;
 import java.io.IOException;
+import java.nio.FloatBuffer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -115,5 +119,12 @@ public class Shader {
     public void detach() {
         glUseProgram(0);
 
+    }
+
+    public void uploadUniformMat4(String name, Matrix4f matrix) {
+        int location = glGetUniformLocation(this.shaderProgramID, name);
+        FloatBuffer uniformBuffer = BufferUtils.createFloatBuffer(16);
+        matrix.get(uniformBuffer);
+        glUniformMatrix4fv(location, false, uniformBuffer);
     }
 }

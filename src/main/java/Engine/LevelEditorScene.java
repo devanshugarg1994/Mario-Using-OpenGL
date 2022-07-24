@@ -1,5 +1,6 @@
 package Engine;
 
+import org.joml.Vector2f;
 import org.lwjgl.BufferUtils;
 import renderer.Shader;
 
@@ -16,10 +17,10 @@ public class LevelEditorScene extends Scene {
 
     private float[] vertexArray = {
             // position               // color
-            0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, // Bottom right 0
-            -0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, // Top left     1
-            0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, // Top right    2
-            -0.5f, -0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f, // Bottom left  3
+            100.5f, 0.5f, 0.0f,      1.0f, 0.0f, 0.0f, 1.0f, // Bottom right 0
+            0.5f, 100.5f, 0.0f,      0.0f, 1.0f, 0.0f, 1.0f, // Top left     1
+            100.5f, 100.5f, 0.0f,    1.0f, 0.0f, 1.0f, 1.0f, // Top right    2
+            0.5f, 0.5f, 0.0f,        1.0f,  1.0f, 0.0f, 1.0f, // Bottom left  3
 
 
     };
@@ -34,7 +35,7 @@ public class LevelEditorScene extends Scene {
 
     public LevelEditorScene() {
         System.out.println("LevelEditorScene");
-
+        this.camera = new Camera(new Vector2f());
 
     }
 
@@ -86,6 +87,8 @@ public class LevelEditorScene extends Scene {
 
         //Bind
         this.defaultShader.use();
+        this.defaultShader.uploadUniformMat4("uProjection", this.camera.getProjectionMatrix());
+        this.defaultShader.uploadUniformMat4("uView", this.camera.getViewMatrix());
         glBindVertexArray(this.vaoID);
         glEnableVertexAttribArray(0);
         glEnableVertexAttribArray(1);
