@@ -164,4 +164,10 @@ public class Shader {
         glUniform1i(location, value);
     }
 
+    public void uploadUniformTexture(String name, int slot) {
+        int location = glGetUniformLocation(this.shaderProgramID, name);
+        this.use();
+        glUniform1i(location, slot);
+    }
+
 }
