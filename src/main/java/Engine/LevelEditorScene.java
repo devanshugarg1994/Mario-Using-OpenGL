@@ -34,6 +34,9 @@ public class LevelEditorScene extends Scene {
     private Texture testTexture;
     private int vaoID, vboID, eboID;
 
+    private GameObject testGameObject;
+    private boolean firstTime = false;
+
     public LevelEditorScene() {
         System.out.println("LevelEditorScene");
         this.camera = new Camera(new Vector2f(-200, -300));
@@ -42,6 +45,9 @@ public class LevelEditorScene extends Scene {
 
     @Override
     public void init() {
+        this.testGameObject = new GameObject("test Object");
+        this.testGameObject.addComponent(new SpriteRenderer());
+        this.addGameObjectToScene(this.testGameObject);
         this.defaultShader = new Shader("assets/shaders/default.glsl");
         defaultShader.compile();
 
@@ -109,6 +115,18 @@ public class LevelEditorScene extends Scene {
         glDisableVertexAttribArray(1);
         glBindVertexArray(0);
         this.defaultShader.detach();
+
+        if (!firstTime) {
+            System.out.println("Creating gameObject 2!");
+            GameObject go = new GameObject("Game Test 2");
+            go.addComponent(new SpriteRenderer());
+            this.addGameObjectToScene(go);
+            firstTime = true;
+        }
+
+        for (GameObject object: this.gameObjects) {
+            object.update(dt);
+        }
 
     }
 }
