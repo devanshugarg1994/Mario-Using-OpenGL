@@ -28,4 +28,7 @@ Added for uniform type and play around shader GLSL code.
 </br>
 </br>
 [Added Texture](../../tree/c5d19750e18ca96f91291deabb0d6770e325b954)</br>
-Added Texture class which take texture path as parameter while creating instance and handling setting other parameter.
+Added Texture class which take texture path as parameter while creating instance and handling setting other parameter.</br>
+</br></br>
+[Component Pattern SetUP](../../tree/b2de7ecf1e28adf0fceab1c6c174bd90e67a54e4)</br>
+As we are working in Java it is not possible us to implement Data Oriented Pattern or ECS. Hence, we are going to use Component Pattern
