@@ -5,7 +5,6 @@ import java.util.List;
 
 public abstract class  Scene {
     private boolean isRunning = false;
-
     protected Camera camera;
     protected List<GameObject> gameObjects = new ArrayList<>();
     public Scene() {
@@ -32,6 +31,10 @@ public abstract class  Scene {
             this.gameObjects.add(gameObject);
             gameObject.start();
         }
+    }
+
+    public Camera getCamera() {
+        return this.camera;
     }
 
     public abstract void update(float dt);

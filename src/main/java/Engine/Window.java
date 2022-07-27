@@ -11,15 +11,15 @@ import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
 public class Window {
-   private int width, height;
-   private String title;
-   private static Window window;
-   private long glfwWindow;
-   private static Scene currentScene;
-   public float r = 1.0f;
-   public float g = 1.0f;
-   public float b = 1.0f;
-   public float a = 1.0f;
+    private int width, height;
+    private String title;
+    private static Window window;
+    private long glfwWindow;
+    private static Scene currentScene;
+    public float r = 1.0f;
+    public float g = 1.0f;
+    public float b = 1.0f;
+    public float a = 1.0f;
 
     private Window() {
         this.width = 1920;
@@ -42,29 +42,33 @@ public class Window {
                 break;
 
             default:
-                assert false: "Unknown Scene" + "  " + newScene + " ";
+                assert false : "Unknown Scene" + "  " + newScene + " ";
                 break;
         }
     }
 
     public static Window get() {
-        if(Window.window == null) {
+        if (Window.window == null) {
             Window.window = new Window();
         }
         return Window.window;
     }
 
+    public static Scene getScene() {
+        return Window.currentScene;
+    }
+
     public void run() {
         System.out.println("Hello LWJGL" + Version.getVersion() + "!");
 
-       this.init();
-       this.loop();
+        this.init();
+        this.loop();
 
-       // Free Memory
-       glfwFreeCallbacks(this.glfwWindow);
-       glfwDestroyWindow(this.glfwWindow);
+        // Free Memory
+        glfwFreeCallbacks(this.glfwWindow);
+        glfwDestroyWindow(this.glfwWindow);
 
-       //Terminate GLFW and remove all callback
+        //Terminate GLFW and remove all callback
         glfwTerminate();
         glfwSetErrorCallback(null).free();
     }
@@ -75,7 +79,7 @@ public class Window {
         GLFWErrorCallback.createPrint(System.err).set();
 
         //init GLFW
-        if(!glfwInit()) {
+        if (!glfwInit()) {
             throw new IllegalStateException("Unable to Init GLFW");
         }
 
@@ -88,7 +92,7 @@ public class Window {
         //create the window
 
         this.glfwWindow = glfwCreateWindow(this.width, this.height, this.title, NULL, NULL);
-        if(this.glfwWindow == NULL) {
+        if (this.glfwWindow == NULL) {
             throw new IllegalStateException("Failed Tom Create GLFW window");
         }
 
@@ -126,13 +130,10 @@ public class Window {
             glClearColor(r, g, b, a);
             glClear(GL_COLOR_BUFFER_BIT);
 
-             if(dt >= 0) {
+            if (dt >= 0) {
                 currentScene.update(dt);
             }
             glfwSwapBuffers(this.glfwWindow);
-
-
-
             endTime = Time.getTime();
             dt = endTime - beginTime;
             beginTime = endTime;
@@ -140,7 +141,6 @@ public class Window {
         }
 
     }
-
 
 
 }

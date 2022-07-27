@@ -1,19 +1,28 @@
 package Engine;
 
+import org.joml.Vector4f;
+
 public class SpriteRenderer extends Component {
 
 
+    private Vector4f color;
+
+    public SpriteRenderer(Vector4f color) {
+        this.color = color;
+    }
+
     @Override
     public void start() {
-        System.out.println("Start For SpriteRenderer");
-        this.firstTime = false;
+
     }
 
     @Override
     public void update(float dt) {
-        if(!this.firstTime) {
-            System.out.println("Updating For SpriteRenderer");
-        }
 
+
+    }
+
+    public Vector4f getColor() {
+        return this.color;
     }
 }

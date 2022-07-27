@@ -46,7 +46,7 @@ public class LevelEditorScene extends Scene {
     @Override
     public void init() {
         this.testGameObject = new GameObject("test Object");
-        this.testGameObject.addComponent(new SpriteRenderer());
+//        this.testGameObject.addComponent(new SpriteRenderer());
         this.addGameObjectToScene(this.testGameObject);
         this.defaultShader = new Shader("assets/shaders/default.glsl");
         defaultShader.compile();
@@ -119,7 +119,7 @@ public class LevelEditorScene extends Scene {
         if (!firstTime) {
             System.out.println("Creating gameObject 2!");
             GameObject go = new GameObject("Game Test 2");
-            go.addComponent(new SpriteRenderer());
+//            go.addComponent(new SpriteRenderer());
             this.addGameObjectToScene(go);
             firstTime = true;
         }

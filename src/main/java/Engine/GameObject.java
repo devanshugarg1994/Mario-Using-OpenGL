@@ -7,11 +7,19 @@ public class GameObject {
 
     private String name;
     private List<Component> components = new ArrayList<>();
+    private Transform transform;
     protected boolean firstTime = true;
 
     public  GameObject(String name) {
         System.out.println("GameObject init");
         this.name = name;
+        this.transform = new Transform();
+    }
+
+    public  GameObject(String name, Transform transform) {
+        System.out.println("GameObject init");
+        this.name = name;
+        this.transform = transform;
     }
 
     public <T extends Component> T getComponent(Class<T> componentObject) {
