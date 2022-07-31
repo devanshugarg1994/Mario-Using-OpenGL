@@ -31,6 +31,12 @@ Added for uniform type and play around shader GLSL code.
 Added Texture class which take texture path as parameter while creating instance and handling setting other parameter.</br>
 </br></br>
 [Component Pattern SetUP](../../tree/b2de7ecf1e28adf0fceab1c6c174bd90e67a54e4)</br>
-As we are working in Java it is not possible us to implement Data Oriented Pattern or ECS. Hence, we are going to use Component Pattern</br></br>
+As we are working in Java it is not possible us to implement Data Oriented Pattern or ECS. Hence, we are going to use Component Pattern
+</br></br>
 [Transform Class Created](../../tree/b9542586ced40cb219a4c1c2b8d6710e51dd2d51)</br>
-Transfrom class is responsible to position and scale value og gameObject.
+Transfrom class is responsible to position and scale value og gameObject.</br></br>
+[Batch Renderer](../../tree/d645b27d03da5ab0d4f1cdf282990cd02e8a5944)</br>
+Created a 2D batched renderer, that is able to render thousands of sprites at 60 FPS.The game objects transform to create a set of
+vertices for every single quad inside the batch renderer, and then upload that vertex buffer to the GPU every frame.</br>
+Create a Renderer class that finds a RenderBatch that has room for a quad, or creates a new RenderBatch if there is none, and then adds the quad to that RenderBatch. 
+The renderer will also sort the batches and render them to the screen.
