@@ -55,7 +55,6 @@ public class GameObject {
     }
 
     public void update(float dt) {
-        System.out.println("Updating of Game Object" + this.name);
 
         if(!this.firstTime) {
             for (int i =0; i < this.components.size(); i++) {

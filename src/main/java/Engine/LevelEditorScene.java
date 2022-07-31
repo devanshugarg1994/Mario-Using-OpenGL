@@ -2,6 +2,7 @@ package Engine;
 
 import org.joml.Vector2f;
 import org.joml.Vector4f;
+import util.AssetsPool;
 
 
 public class LevelEditorScene extends Scene {
@@ -32,6 +33,11 @@ public class LevelEditorScene extends Scene {
                 this.addGameObjectToScene(go);
             }
         }
+        this.loadAllResources();
+    }
+
+    private void loadAllResources() {
+        AssetsPool.getShader("assets/shaders/default.glsl");
     }
 
     @Override
