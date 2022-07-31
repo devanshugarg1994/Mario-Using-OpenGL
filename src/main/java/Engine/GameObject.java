@@ -7,7 +7,7 @@ public class GameObject {
 
     private String name;
     private List<Component> components = new ArrayList<>();
-    private Transform transform;
+    public Transform transform;
     protected boolean firstTime = true;
 
     public  GameObject(String name) {
@@ -55,7 +55,7 @@ public class GameObject {
     }
 
     public void update(float dt) {
-        System.out.println("Updating of Game Object");
+        System.out.println("Updating of Game Object" + this.name);
 
         if(!this.firstTime) {
             for (int i =0; i < this.components.size(); i++) {

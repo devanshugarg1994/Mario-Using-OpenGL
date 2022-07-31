@@ -130,7 +130,7 @@ public class Shader {
 
     }
 
-    public void uploadUniformMat4(String name, Matrix4f matrix) {
+    public void uploadUniformMat4f(String name, Matrix4f matrix) {
         int location = glGetUniformLocation(this.shaderProgramID, name);
         this.use();
         FloatBuffer uniformBuffer = BufferUtils.createFloatBuffer(16);
