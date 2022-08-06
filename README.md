@@ -43,4 +43,8 @@ Create a Renderer class that finds a RenderBatch that has room for a quad, or cr
 The renderer will also sort the batches and render them to the screen.</br></br>
 [Added AssetsPool class for resource management](../../tree/b593a85b64d8d54ede8e34f261d17dd0e74fddf1)</br>
 We have created a class that handles all the resources (textures, shaders, sounds, sprite-sheets, etc.) and supply a reference to our 
-game on demand, while only keeping one object in memory for each resource.
+game on demand, while only keeping one object in memory for each resource.</br></br>
+
+[Texture Batch Rendering](../../tree/01abd11b64af8367055a89099f5ccf0055a0c02f)</br>
+We  add texture batching to our current batched renderer. This allows us to bind up to 16 different textures 
+per draw call, which means that we can batch together a lot more quads with different textures for each quad.
