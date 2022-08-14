@@ -1,7 +1,7 @@
 package renderer;
 
 import Engine.GameObject;
-import Engine.SpriteRenderer;
+import component.SpriteRenderer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ public class Renderer {
     }
 
     public void add(GameObject go) {
-        SpriteRenderer spr = go.getComponent(SpriteRenderer.class);
+        SpriteRenderer spr = go.getComponent(SpriteRenderer.class); // Only handling Sprite Rendering for now
         if (spr != null) {
             add(spr);
         }
@@ -25,9 +25,13 @@ public class Renderer {
         boolean added = false;
         for (RenderBatch batch : batches) {
             if (batch.hasRoom()) {
-                batch.addSprite(sprite);
-                added = true;
-                break;
+                Texture tex = sprite.getTexture();
+                if(tex == null ||  batch.hasTexture(tex) || batch.hasTextureRoom()) {
+                    batch.addSprite(sprite);
+                    added = true;
+                    break;
+                }
+
             }
         }
 

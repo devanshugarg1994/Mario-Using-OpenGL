@@ -1,6 +1,6 @@
 package renderer;
 
-import Engine.SpriteRenderer;
+import component.SpriteRenderer;
 import Engine.Window;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
@@ -13,7 +13,6 @@ import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL30.glBindVertexArray;
 import static org.lwjgl.opengl.GL30.glGenVertexArrays;
-
 
 
 public class RenderBatch {
@@ -37,7 +36,7 @@ public class RenderBatch {
     private int numOfSprites;
     private boolean hasRoom;
     private float[] vertices;
-    private int [] texSlots = {0, 1, 2, 3, 4, 5, 6, 7};
+    private int[] texSlots = {0, 1, 2, 3, 4, 5, 6, 7};
 
     private List<Texture> textureList;
     private int vaoID, vboID;
@@ -94,20 +93,15 @@ public class RenderBatch {
         this.sprites[index] = sprite;
         this.numOfSprites++;
 
-        if(sprite.getTexture() != null) {
-            if(this.textureList.size() < 8) {
-                if(!this.textureList.contains(sprite.getTexture())) {
+        if (sprite.getTexture() != null) {
+            if (this.textureList.size() < 8) {
+                if (!this.textureList.contains(sprite.getTexture())) {
                     this.textureList.add(sprite.getTexture());
                 }
-            } else {
-
             }
-
         }
-
         // Add properties to local vertices array
         this.loadVertexProperties(index);
-
         if (this.numOfSprites >= this.maxBatchSize) {
             this.hasRoom = false;
         }
@@ -148,13 +142,12 @@ public class RenderBatch {
 
         // Find offset within array (4 vertices per sprite)
         int offset = index * 4 * VERTEX_SIZE;
-
         Vector4f color = sprite.getColor();
-        Vector2f [] texCords = sprite.getTextCords();
+        Vector2f[] texCords = sprite.getTextCords();
         int texId = 0;
-        if(sprite.getTexture() != null) {
-            for (int i= 0; i< this.textureList.size(); i++) {
-                if(this.textureList.get(i) == sprite.getTexture()) {
+        if (sprite.getTexture() != null) {
+            for (int i = 0; i < this.textureList.size(); i++) {
+                if (this.textureList.get(i) == sprite.getTexture()) {
                     texId = i + 1;
                     break;
                 }
@@ -163,7 +156,7 @@ public class RenderBatch {
         // Add vertices with the appropriate properties
         float xAdd = 1.0f;
         float yAdd = 1.0f;
-        for (int i=0; i < 4; i++) {
+        for (int i = 0; i < 4; i++) {
             if (i == 1) {
                 yAdd = 0.0f;
             } else if (i == 2) {
@@ -184,7 +177,7 @@ public class RenderBatch {
 
             //Load texture coordinates
             this.vertices[offset + 6] = texCords[i].x;
-            this.vertices[offset + 7] =  texCords[i].y;
+            this.vertices[offset + 7] = texCords[i].y;
             // Load texture id
             this.vertices[offset + 8] = texId;
 
@@ -195,23 +188,20 @@ public class RenderBatch {
     private int[] generateIndices() {
         // 6 indices per quad (3 per triangle)
         int[] elements = new int[6 * maxBatchSize];
-        for (int i=0; i < maxBatchSize; i++) {
+        for (int i = 0; i < maxBatchSize; i++) {
             loadElementIndices(elements, i);
         }
-
         return elements;
     }
 
     private void loadElementIndices(int[] elements, int index) {
         int offsetArrayIndex = 6 * index;
         int offset = 4 * index;
-
         // 3, 2, 0, 0, 2, 1        7, 6, 4, 4, 6, 5
         // Triangle 1
         elements[offsetArrayIndex] = offset + 3;
         elements[offsetArrayIndex + 1] = offset + 2;
         elements[offsetArrayIndex + 2] = offset + 0;
-
         // Triangle 2
         elements[offsetArrayIndex + 3] = offset + 0;
         elements[offsetArrayIndex + 4] = offset + 2;
@@ -220,5 +210,13 @@ public class RenderBatch {
 
     public boolean hasRoom() {
         return this.hasRoom;
+    }
+
+    public boolean hasTextureRoom() {
+        return this.textureList.size() < 8;
+    }
+
+    public boolean hasTexture(Texture tex) {
+        return this.textureList.contains(tex);
     }
 }
