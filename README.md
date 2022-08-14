@@ -53,4 +53,9 @@ per draw call, which means that we can batch together a lot more quads with diff
 [Created SpriteSheet Class](../../tree/fe5f9b8b8914753d7ecd55ee57b6a2eb1c029e15)</br>
 We have sample sub-images from a texture by changing the texture coordinates.
 Actually implement this by creating a class that encapsulates this behavior in a spriteSheet in class called `SpriteSheet`. This spriteSheet is able to be queried for
-a particular sprite by index, which makes it very convenient to use when grabbing multiple sprites from a single image.
+a particular sprite by index, which makes it very convenient to use when grabbing multiple sprites from a single image.</br></br>
+
+[Added Dirty Flags](../../tree/4b56eb1fbcf4552385b151a626ecf28b89a4a5e7)</br>
+Setup a dirty flag system with our render batched.
+This allows us to only re-buffer data that has changed, which should save some CPU time while rendering our batches.
+This also allows us to control how the data gets moved around everytime a value that we have interest in changes.
