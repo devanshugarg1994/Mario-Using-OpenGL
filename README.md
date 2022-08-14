@@ -47,15 +47,23 @@ game on demand, while only keeping one object in memory for each resource.</br><
 
 [Texture Batch Rendering](../../tree/01abd11b64af8367055a89099f5ccf0055a0c02f)</br>
 We  add texture batching to our current batched renderer. This allows us to bind up to 16 different textures 
-per draw call, which means that we can batch together a lot more quads with different textures for each quad.</br></br>
-
+per draw call, which means that we can batch together a lot more quads with different textures for each quad.
+</br></br>
 
 [Created SpriteSheet Class](../../tree/fe5f9b8b8914753d7ecd55ee57b6a2eb1c029e15)</br>
 We have sample sub-images from a texture by changing the texture coordinates.
 Actually implement this by creating a class that encapsulates this behavior in a spriteSheet in class called `SpriteSheet`. This spriteSheet is able to be queried for
-a particular sprite by index, which makes it very convenient to use when grabbing multiple sprites from a single image.</br></br>
+a particular sprite by index, which makes it very convenient to use when grabbing multiple sprites from a single image.
+</br></br>
 
 [Added Dirty Flags](../../tree/4b56eb1fbcf4552385b151a626ecf28b89a4a5e7)</br>
 Setup a dirty flag system with our render batched.
 This allows us to only re-buffer data that has changed, which should save some CPU time while rendering our batches.
 This also allows us to control how the data gets moved around everytime a value that we have interest in changes.
+</br></br>
+
+[Alpha Blending and zIndex](../../tree/7df29285b7745afcddbb1994603a3e4000330de4)</br>
+We have enabled Alpha blending using  simple mathematical function.
+Then we have implemented a z-indexing system for our batched renderer. This allows us to add sprites in a layered manner
+like photoshop to our game.
+We now have sufficient means to create layered 2D games that use the alpha channel for transparency.
