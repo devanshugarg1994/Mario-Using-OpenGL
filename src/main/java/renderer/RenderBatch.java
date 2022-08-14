@@ -15,7 +15,7 @@ import static org.lwjgl.opengl.GL30.glBindVertexArray;
 import static org.lwjgl.opengl.GL30.glGenVertexArrays;
 
 
-public class RenderBatch {
+public class RenderBatch implements Comparable<RenderBatch> {
     // Vertex
     // ======
     // Pos               Color
@@ -42,8 +42,10 @@ public class RenderBatch {
     private int vaoID, vboID;
     private int maxBatchSize;
     private Shader shader;
+    private int zIndex;
 
-    public RenderBatch(int maxBatchSize) {
+    public RenderBatch(int maxBatchSize, int zIndex) {
+        this.zIndex = zIndex;
         shader = AssetsPool.getShader("assets/shaders/default.glsl");
         shader.compile();
         this.sprites = new SpriteRenderer[maxBatchSize];
@@ -109,15 +111,15 @@ public class RenderBatch {
 
     public void render() {
         boolean reBufferedData = false;
-        for (int i =0; i< this.numOfSprites; i++) {
+        for (int i = 0; i < this.numOfSprites; i++) {
             SpriteRenderer spr = this.sprites[i];
-            if(spr.isDirty()) {
+            if (spr.isDirty()) {
                 this.loadVertexProperties(i);
                 spr.setClean();
                 reBufferedData = true;
             }
         }
-        if(reBufferedData) {
+        if (reBufferedData) {
             glBindBuffer(GL_ARRAY_BUFFER, vboID);
             glBufferSubData(GL_ARRAY_BUFFER, 0, vertices);
         }
@@ -228,5 +230,14 @@ public class RenderBatch {
 
     public boolean hasTexture(Texture tex) {
         return this.textureList.contains(tex);
+    }
+
+    public int getzIndex() {
+        return this.zIndex;
+    }
+
+    @Override
+    public int compareTo(RenderBatch o) {
+        return Integer.compare(this.zIndex, o.getzIndex());
     }
 }

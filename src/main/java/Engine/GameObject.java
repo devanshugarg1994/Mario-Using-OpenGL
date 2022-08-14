@@ -9,17 +9,24 @@ public class GameObject {
     private List<Component> components = new ArrayList<>();
     public Transform transform;
     protected boolean firstTime = true;
+    private int zIndex;
 
     public  GameObject(String name) {
         System.out.println("GameObject init");
         this.name = name;
         this.transform = new Transform();
+        this.zIndex = 0;
     }
 
-    public  GameObject(String name, Transform transform) {
+    public  GameObject(String name, Transform transform, int zIndex) {
         System.out.println("GameObject init");
         this.name = name;
         this.transform = transform;
+        this.zIndex = zIndex;
+    }
+
+    public int getzIndex() {
+        return this.zIndex;
     }
 
     public <T extends Component> T getComponent(Class<T> componentObject) {
