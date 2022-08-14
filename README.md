@@ -56,13 +56,13 @@ Actually implement this by creating a class that encapsulates this behavior in a
 a particular sprite by index, which makes it very convenient to use when grabbing multiple sprites from a single image.
 </br></br>
 
-[Added Dirty Flags](../../tree/7a6358183fbe8785fef07e68106e08326edfcb6b)</br>
+[Added Dirty Flags](../../tree/4b56eb1fbcf4552385b151a626ecf28b89a4a5e7)</br>
 Setup a dirty flag system with our render batched.
 This allows us to only re-buffer data that has changed, which should save some CPU time while rendering our batches.
 This also allows us to control how the data gets moved around everytime a value that we have interest in changes.
 </br></br>
 
-[Alpha Blending and zIndex](../../tree/7df29285b7745afcddbb1994603a3e4000330de4)</br>
+[Alpha Blending and zIndex](../../tree/7a6358183fbe8785fef07e68106e08326edfcb6b)</br>
 We have enabled Alpha blending using  simple mathematical function.
 Then we have implemented a z-indexing system for our batched renderer. This allows us to add sprites in a layered manner
 like photoshop to our game.
