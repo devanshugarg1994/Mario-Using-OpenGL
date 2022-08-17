@@ -67,3 +67,7 @@ We have enabled Alpha blending using  simple mathematical function.
 Then we have implemented a z-indexing system for our batched renderer. This allows us to add sprites in a layered manner
 like photoshop to our game.
 We now have sufficient means to create layered 2D games that use the alpha channel for transparency.
+</br></br>
+
+[Imgui Setup and Integration with our Scene Architecture](../../tree/04dd8e228f3940d26d40f998aa637da4fb62d15e)</br> 
+Setup ImGui(Immediate mode Gui). After that we have also Integrated our game Scene with ImGui.
