@@ -1,5 +1,6 @@
 package Engine;
 
+import imgui.ImGui;
 import renderer.Renderer;
 
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ public abstract class  Scene {
     protected Renderer renderer = new Renderer();
     protected Camera camera;
     protected List<GameObject> gameObjects = new ArrayList<>();
+    protected GameObject activeGameObject = null; // Parent Game object of the scene
     public Scene() {
 
     }
@@ -43,4 +45,17 @@ public abstract class  Scene {
     }
 
     public abstract void update(float dt);
+
+    public void sceneImGui() {
+        if(this.activeGameObject != null) {
+            ImGui.begin("Start Inspector Level");
+            this.activeGameObject.imGui();
+            ImGui.end();
+        }
+        this.imGui();
+    }
+
+    public void imGui() {
+
+    }
 }

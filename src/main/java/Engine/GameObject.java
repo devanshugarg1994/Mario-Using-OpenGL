@@ -78,4 +78,10 @@ public class GameObject {
         this.firstTime = false;
     }
 
+    public void imGui() {
+        for(Component c : this.components) {
+            c.imGui();
+        }
+    }
+
 }

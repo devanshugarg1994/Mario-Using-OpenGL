@@ -3,7 +3,9 @@ package Engine;
 import component.Sprite;
 import component.SpriteRenderer;
 import component.SpriteSheet;
+import imgui.ImGui;
 import org.joml.Vector2f;
+import org.joml.Vector4f;
 import util.AssetsPool;
 
 
@@ -25,8 +27,9 @@ public class LevelEditorScene extends Scene {
 
          this.object1 = new GameObject("mario", new Transform(new Vector2f(200, 100),
                  new Vector2f(256, 256)), 1);
-        this.object1.addComponent(new SpriteRenderer(new Sprite(AssetsPool.getTexture("assets/texture/blendImage1.png"))));
+        this.object1.addComponent(new SpriteRenderer(new Vector4f(2, 1, 0, 1)));
         this.addGameObjectToScene(this.object1);
+        this.activeGameObject = this.object1;
 
         GameObject object2 = new GameObject("goomba", new Transform(new Vector2f(400, 100),
                 new Vector2f(256, 256)), 2);
@@ -36,7 +39,6 @@ public class LevelEditorScene extends Scene {
     }
 
     private void loadAllResources() {
-
         AssetsPool.getShader("assets/shaders/default.glsl");
         AssetsPool.addSpriteSheet("assets/texture/spriteSheet.png",
                 new SpriteSheet(AssetsPool.getTexture("assets/texture/spriteSheet.png")
@@ -48,11 +50,16 @@ public class LevelEditorScene extends Scene {
     @Override
     public void update(float dt) {
         System.out.println("FPS: " + (1.0f / dt));
-
         for (GameObject go : this.gameObjects) {
             go.update(dt);
         }
-
         this.renderer.render();
+    }
+
+    @Override
+    public void imGui() {
+        ImGui.begin("Test Window");
+        ImGui.text("Some Random text");
+        ImGui.end();
     }
 }
