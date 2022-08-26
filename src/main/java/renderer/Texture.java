@@ -15,7 +15,7 @@ public class Texture {
     private float textureWidth;
     private float textureHeight;
 
-    public Texture(String filepath) {
+    public void init(String filepath) {
         this.filepath = filepath;
 
         // Generate TextureBuffer

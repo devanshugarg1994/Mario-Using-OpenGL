@@ -1,5 +1,7 @@
 package Engine;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import component.Sprite;
 import component.SpriteRenderer;
 import component.SpriteSheet;
@@ -13,6 +15,7 @@ public class LevelEditorScene extends Scene {
 
     private GameObject object1;
     private SpriteSheet spriteSheet;
+
     public LevelEditorScene() {
 
     }
@@ -23,18 +26,27 @@ public class LevelEditorScene extends Scene {
 
         this.camera = new Camera(new Vector2f(-250, 0));
 
-         this.spriteSheet = AssetsPool.getSpriteSheet("assets/texture/spriteSheet.png");
+        this.spriteSheet = AssetsPool.getSpriteSheet("assets/texture/spriteSheet.png");
 
-         this.object1 = new GameObject("mario", new Transform(new Vector2f(200, 100),
-                 new Vector2f(256, 256)), 1);
-        this.object1.addComponent(new SpriteRenderer(new Vector4f(2, 1, 0, 1)));
+        this.object1 = new GameObject("mario", new Transform(new Vector2f(200, 100),
+                new Vector2f(256, 256)), 1);
+
+        SpriteRenderer spriteRenderer1 = new SpriteRenderer();
+        spriteRenderer1.setColor(new Vector4f(2, 1, 0, 1));
+        this.object1.addComponent(spriteRenderer1);
         this.addGameObjectToScene(this.object1);
         this.activeGameObject = this.object1;
 
         GameObject object2 = new GameObject("goomba", new Transform(new Vector2f(400, 100),
                 new Vector2f(256, 256)), 2);
-        object2.addComponent(new SpriteRenderer(new Sprite(AssetsPool.getTexture("assets/texture/blendImage2.png"))));
+        SpriteRenderer spriteRenderer2 = new SpriteRenderer();
+        Sprite sprite = new Sprite();
+        sprite.setTexture(AssetsPool.getTexture("assets/texture/blendImage2.png"));
+        spriteRenderer2.setSprite(sprite);
+        object2.addComponent(spriteRenderer2);
         this.addGameObjectToScene(object2);
+
+
 
     }
 
@@ -42,9 +54,8 @@ public class LevelEditorScene extends Scene {
         AssetsPool.getShader("assets/shaders/default.glsl");
         AssetsPool.addSpriteSheet("assets/texture/spriteSheet.png",
                 new SpriteSheet(AssetsPool.getTexture("assets/texture/spriteSheet.png")
-                        , 16,16,24, 0));
+                        , 16, 16, 24, 0));
     }
-
 
 
     @Override
