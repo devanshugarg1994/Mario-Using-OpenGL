@@ -71,3 +71,10 @@ We now have sufficient means to create layered 2D games that use the alpha chann
 
 [Imgui Setup and Integration with our Scene Architecture](../../tree/04dd8e228f3940d26d40f998aa637da4fb62d15e)</br> 
 Setup ImGui(Immediate mode Gui). After that we have also Integrated our game Scene with ImGui.
+</br></br>
+
+[Serialization And Deserialization](../../tree/be74f5fe20923f30f75bd76f0d0b3ec358daaac3)</br>
+Integrated GSON in our game. This library serializes objects into a Json format, which can then be deserialized with the same library.
+It uses reflection to do this, which means that the programmer does not have to write any serialization code at all. TO avoid Circular 
+Dependency error while deserializing json object we have extended and created Serialization and Deserialization for Components and 
+GameObject class.
