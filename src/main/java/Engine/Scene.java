@@ -14,7 +14,7 @@ import java.util.List;
 
 public abstract class  Scene {
     private boolean isRunning = false;
-    private boolean levelLoaded = false;
+    protected boolean levelLoaded = false;
     protected Renderer renderer = new Renderer();
     protected Camera camera;
     protected List<GameObject> gameObjects = new ArrayList<>();

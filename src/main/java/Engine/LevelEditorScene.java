@@ -2,6 +2,7 @@ package Engine;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import component.RigidBody;
 import component.Sprite;
 import component.SpriteRenderer;
 import component.SpriteSheet;
@@ -23,21 +24,23 @@ public class LevelEditorScene extends Scene {
     @Override
     public void init() {
         this.loadAllResources();
-
         this.camera = new Camera(new Vector2f(-250, 0));
-
+        if(this.levelLoaded) {
+            this.activeGameObject = this.gameObjects.get(0);
+            System.out.println(this.activeGameObject.getName());
+            return;
+        }
         this.spriteSheet = AssetsPool.getSpriteSheet("assets/texture/spriteSheet.png");
-
-        this.object1 = new GameObject("mario", new Transform(new Vector2f(200, 100),
+        this.object1 = new GameObject("object 1", new Transform(new Vector2f(200, 100),
                 new Vector2f(256, 256)), 1);
-
         SpriteRenderer spriteRenderer1 = new SpriteRenderer();
         spriteRenderer1.setColor(new Vector4f(2, 1, 0, 1));
         this.object1.addComponent(spriteRenderer1);
+        this.object1.addComponent(new RigidBody());
         this.addGameObjectToScene(this.object1);
         this.activeGameObject = this.object1;
 
-        GameObject object2 = new GameObject("goomba", new Transform(new Vector2f(400, 100),
+        GameObject object2 = new GameObject("Object 2", new Transform(new Vector2f(400, 100),
                 new Vector2f(256, 256)), 2);
         SpriteRenderer spriteRenderer2 = new SpriteRenderer();
         Sprite sprite = new Sprite();
@@ -45,9 +48,6 @@ public class LevelEditorScene extends Scene {
         spriteRenderer2.setSprite(sprite);
         object2.addComponent(spriteRenderer2);
         this.addGameObjectToScene(object2);
-
-
-
     }
 
     private void loadAllResources() {
@@ -60,7 +60,6 @@ public class LevelEditorScene extends Scene {
 
     @Override
     public void update(float dt) {
-        System.out.println("FPS: " + (1.0f / dt));
         for (GameObject go : this.gameObjects) {
             go.update(dt);
         }

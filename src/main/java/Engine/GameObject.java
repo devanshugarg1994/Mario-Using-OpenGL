@@ -62,7 +62,6 @@ public class GameObject {
     }
 
     public void update(float dt) {
-
         if(!this.firstTime) {
             for (int i =0; i < this.components.size(); i++) {
                 components.get(i).update(dt);
@@ -82,6 +81,10 @@ public class GameObject {
         for(Component c : this.components) {
             c.imGui();
         }
+    }
+
+    public String getName() {
+        return this.name;
     }
 
 }
