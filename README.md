@@ -34,7 +34,7 @@ Added Texture class which take texture path as parameter while creating instance
 As we are working in Java it is not possible us to implement Data Oriented Pattern or ECS. Hence, we are going to use Component Pattern
 </br></br>
 [Transform Class Created](../../tree/b9542586ced40cb219a4c1c2b8d6710e51dd2d51)</br>
-Transfrom class is responsible to position and scale value og gameObject.
+Transform class is responsible to position and scale value og gameObject.
 </br></br>
 [Batch Renderer](../../tree/d645b27d03da5ab0d4f1cdf282990cd02e8a5944)</br>
 Created a 2D batched renderer, that is able to render thousands of sprites at 60 FPS.The game objects transform to create a set of
@@ -78,3 +78,11 @@ Integrated GSON in our game. This library serializes objects into a Json format,
 It uses reflection to do this, which means that the programmer does not have to write any serialization code at all. TO avoid Circular 
 Dependency error while deserializing json object we have extended and created Serialization and Deserialization for Components and 
 GameObject class.
+</br></br>
+
+[ Exposing Variables to the Level Editor](../../tree/8d837538c022c8e1f0dd0ca0dd60b634d363f101)</br>
+Here we have expose public and private member variables of a class to
+our level editor. This way we do not have to build a custom ImGui window for every variable
+if we do not want too, but we still can do that if we would like to. We will use Java's
+reflection library to find and expose these variables, and then we will use 
+the Gson to save and load these values, making for a mostly complete level editor.
