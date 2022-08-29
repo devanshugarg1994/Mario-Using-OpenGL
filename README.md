@@ -90,4 +90,8 @@ the Gson to save and load these values, making for a mostly complete level edito
 
 [Converting Screen Coords to World Coords](../../tree/b259c026f28c2daac0736b73adb17079b035e7df)</br>
 Converted screen coordinates to world coordinates using our orthographic projection.
-Created a dynamically resized window in ImGui, with image buttons that come from our spriteSheets.
+Created a dynamically resized window in ImGui, with image buttons that come from our spriteSheets.</br></br>
+
+[Created Drag and Drop for Level Editor and Uuid System for game Object and components](../../tree/9e661db54ba03f89d17096c7e0a5689bad09d119)</br>
+We have created a  `MouseControl` class which will handle the mouse positioning once a Tile is selected and will be set once we click again.
+Also created  uuid system, so we can store references of other object while serializing and Deserializing.
