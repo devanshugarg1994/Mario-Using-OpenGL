@@ -1,11 +1,10 @@
-package Engine;
+package scenes;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import component.RigidBody;
-import component.Sprite;
-import component.SpriteRenderer;
-import component.SpriteSheet;
+import Engine.Camera;
+import Engine.GameObject;
+import Engine.Prefabs;
+import Engine.Transform;
+import component.*;
 import imgui.ImGui;
 import imgui.ImVec2;
 import org.joml.Vector2f;
@@ -18,6 +17,7 @@ public class LevelEditorScene extends Scene {
     private GameObject object1;
     private SpriteSheet spriteSheet;
 
+    MouseControl mouseControl = new MouseControl();
     public LevelEditorScene() {
 
     }
@@ -42,14 +42,6 @@ public class LevelEditorScene extends Scene {
         this.addGameObjectToScene(this.object1);
         this.activeGameObject = this.object1;
 
-//        GameObject object2 = new GameObject("Object 2", new Transform(new Vector2f(400, 100),
-//                new Vector2f(256, 256)), 2);
-//        SpriteRenderer spriteRenderer2 = new SpriteRenderer();
-//        Sprite sprite = new Sprite();
-//        sprite.setTexture(AssetsPool.getTexture("assets/texture/blendImage2.png"));
-//        spriteRenderer2.setSprite(sprite);
-//        object2.addComponent(spriteRenderer2);
-//        this.addGameObjectToScene(object2);
     }
 
     private void loadAllResources() {
@@ -62,6 +54,7 @@ public class LevelEditorScene extends Scene {
 
     @Override
     public void update(float dt) {
+        this.mouseControl.update(dt);
         for (GameObject go : this.gameObjects) {
             go.update(dt);
         }
@@ -89,11 +82,10 @@ public class LevelEditorScene extends Scene {
 
             ImGui.pushID(i);
             if(ImGui.imageButton(id, spriteWidth, spriteHeight, textCords[0].x, textCords[0].y, textCords[2].x, textCords[2].y)) {
-                System.out.println("Button " + i + " clicked");
+                GameObject object = Prefabs.generateSpriteObject(sprite, spriteWidth, spriteHeight);
+                this.mouseControl.pickUpObject(object);
             }
-
             ImGui.popID();
-
             ImVec2 lastButtonPos = new ImVec2();
             ImGui.getItemRectMax(lastButtonPos);
             float lastButtonX2 = lastButtonPos.x;

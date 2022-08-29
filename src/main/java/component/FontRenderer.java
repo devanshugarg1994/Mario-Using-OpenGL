@@ -1,4 +1,4 @@
-package Engine;
+package component;
 
 public class FontRenderer extends Component {
 

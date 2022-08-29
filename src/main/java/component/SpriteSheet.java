@@ -1,7 +1,6 @@
 package component;
 
 import org.joml.Vector2f;
-import org.w3c.dom.Text;
 import renderer.Texture;
 
 import java.util.ArrayList;

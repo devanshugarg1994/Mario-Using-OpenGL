@@ -1,5 +1,6 @@
-package Engine;
+package component;
 
+import Engine.GameObject;
 import imgui.ImGui;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
@@ -9,6 +10,8 @@ import java.lang.reflect.Modifier;
 
 public abstract class Component {
 
+    private static int ID_COUNTER = 0;
+    private int uid = -1;
     public transient GameObject gameObject = null;
 
     public void start() {
@@ -17,6 +20,23 @@ public abstract class Component {
 
     public void update(float dt) {
 
+    }
+
+    public void generateID() {
+        if(this.uid == -1) {
+            this.uid = ID_COUNTER++;
+        }
+    }
+
+    public int getUuid() {
+        if(this.uid == -1) {
+            assert false: "Try to accessing Uuid which is not set : " + this;
+        }
+        return this.uid;
+    }
+
+    public static void initUuid(int maxId) {
+        ID_COUNTER = maxId;
     }
 
     public void imGui() {

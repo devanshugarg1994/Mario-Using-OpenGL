@@ -1,6 +1,5 @@
 package component;
 
-import Engine.Component;
 import org.joml.Vector2f;
 import renderer.Texture;
 

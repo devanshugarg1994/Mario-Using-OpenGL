@@ -1,9 +1,13 @@
 package Engine;
 
+import component.Component;
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameObject {
+
+    private int uUid = -1;
+    public static int ID_COUNTER = 0;
 
     private String name;
     private List<Component> components = new ArrayList<>();
@@ -11,18 +15,13 @@ public class GameObject {
     protected boolean firstTime = true;
     private int zIndex;
 
-    public  GameObject(String name) {
-        System.out.println("GameObject init");
-        this.name = name;
-        this.transform = new Transform();
-        this.zIndex = 0;
-    }
 
     public  GameObject(String name, Transform transform, int zIndex) {
         System.out.println("GameObject init");
         this.name = name;
         this.transform = transform;
         this.zIndex = zIndex;
+        this.uUid = ID_COUNTER++;
     }
 
     public int getzIndex() {
@@ -57,6 +56,7 @@ public class GameObject {
     }
 
     public void addComponent(Component componentObject) {
+        componentObject.generateID();
         this.components.add(componentObject);
         componentObject.gameObject = this;
     }
@@ -87,4 +87,18 @@ public class GameObject {
         return this.name;
     }
 
+    public static void initUuid(int maxId) {
+        ID_COUNTER = maxId;
+    }
+
+    public int getUuid() {
+        if(this.uUid == -1) {
+            assert false: "Try to accessing Uuid which is not set : " + this;
+        }
+        return this.uUid;
+    }
+
+    public  List<Component> getAllComponents() {
+        return this.components;
+    }
 }
