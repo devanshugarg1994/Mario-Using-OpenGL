@@ -6,6 +6,24 @@ import renderer.Texture;
 
 public class Sprite {
 
+    private float width, height;
+
+    public float getHeight() {
+        return height;
+    }
+
+    public void setHeight(float height) {
+        this.height = height;
+    }
+
+    public void setWidth(float width) {
+        this.width = width;
+    }
+
+    public float getWidth() {
+        return width;
+    }
+
     private Texture texture;
     private Vector2f [] texCord = {
                 new Vector2f(1, 1),
@@ -29,5 +47,9 @@ public class Sprite {
 
     public void setTexCord(Vector2f[] texCord) {
         this.texCord = texCord;
+    }
+
+    public int getTextureID() {
+        return texture == null ? -1: texture.getTextureID();
     }
 }

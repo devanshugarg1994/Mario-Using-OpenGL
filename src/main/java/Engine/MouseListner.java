@@ -1,5 +1,7 @@
 package Engine;
 
+import org.joml.Vector4f;
+
 import static org.lwjgl.glfw.GLFW.GLFW_PRESS;
 import static org.lwjgl.glfw.GLFW.GLFW_RELEASE;
 
@@ -57,8 +59,7 @@ public class MouseListner {
          MouseListner.get().scrollY = 0;
          MouseListner.get().lastX =  MouseListner.get().xPos;
          MouseListner.get().lastY =  MouseListner.get().yPos;
-//         MouseListner.get().xPos = 0;
-//         MouseListner.get().yPos = 0;
+
     }
 
     public static float getPosX() {
@@ -84,6 +85,30 @@ public class MouseListner {
 
     public static boolean getIsDragging() {
         return ( MouseListner.get().isDragging);
+    }
+
+    public static float getOrthoX() {
+        float currentX = (MouseListner.getPosX() / Window.getWidth()) * 2.0f - 1.0f;
+        Vector4f temp = new Vector4f(currentX, 0, 0, 1);
+        Camera camera = Window.getScene().camera;
+
+        temp.mul(camera.getInverseProjectionMatrix())
+                .mul(camera.getInverseViewMatrix());
+        currentX = temp.x;
+
+        return  currentX;
+    }
+
+    public static float getOrthoY() {
+        float currentY = (MouseListner.getPosY() / Window.getWidth()) * 2.0f - 1.0f;
+        Vector4f temp = new Vector4f(0, currentY, 0, 1);
+        Camera camera = Window.getScene().camera;
+
+        temp.mul(camera.getInverseProjectionMatrix())
+                .mul(camera.getInverseViewMatrix());
+        currentY = temp.y;
+
+        return  currentY;
     }
 
     public static boolean getMouseButtonPressed(int button) {

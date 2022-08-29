@@ -74,4 +74,7 @@ public class Texture {
         return this.textureHeight;
     }
 
+    public int getTextureID() {
+        return textureID;
+    }
 }

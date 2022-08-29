@@ -7,6 +7,7 @@ import component.Sprite;
 import component.SpriteRenderer;
 import component.SpriteSheet;
 import imgui.ImGui;
+import imgui.ImVec2;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
 import util.AssetsPool;
@@ -25,12 +26,13 @@ public class LevelEditorScene extends Scene {
     public void init() {
         this.loadAllResources();
         this.camera = new Camera(new Vector2f(-250, 0));
+        this.spriteSheet = AssetsPool.getSpriteSheet("assets/texture/spriteSheets/decorationsAndBlocks.png");
+
         if(this.levelLoaded) {
             this.activeGameObject = this.gameObjects.get(0);
             System.out.println(this.activeGameObject.getName());
             return;
         }
-        this.spriteSheet = AssetsPool.getSpriteSheet("assets/texture/spriteSheet.png");
         this.object1 = new GameObject("object 1", new Transform(new Vector2f(200, 100),
                 new Vector2f(256, 256)), 1);
         SpriteRenderer spriteRenderer1 = new SpriteRenderer();
@@ -40,21 +42,21 @@ public class LevelEditorScene extends Scene {
         this.addGameObjectToScene(this.object1);
         this.activeGameObject = this.object1;
 
-        GameObject object2 = new GameObject("Object 2", new Transform(new Vector2f(400, 100),
-                new Vector2f(256, 256)), 2);
-        SpriteRenderer spriteRenderer2 = new SpriteRenderer();
-        Sprite sprite = new Sprite();
-        sprite.setTexture(AssetsPool.getTexture("assets/texture/blendImage2.png"));
-        spriteRenderer2.setSprite(sprite);
-        object2.addComponent(spriteRenderer2);
-        this.addGameObjectToScene(object2);
+//        GameObject object2 = new GameObject("Object 2", new Transform(new Vector2f(400, 100),
+//                new Vector2f(256, 256)), 2);
+//        SpriteRenderer spriteRenderer2 = new SpriteRenderer();
+//        Sprite sprite = new Sprite();
+//        sprite.setTexture(AssetsPool.getTexture("assets/texture/blendImage2.png"));
+//        spriteRenderer2.setSprite(sprite);
+//        object2.addComponent(spriteRenderer2);
+//        this.addGameObjectToScene(object2);
     }
 
     private void loadAllResources() {
         AssetsPool.getShader("assets/shaders/default.glsl");
-        AssetsPool.addSpriteSheet("assets/texture/spriteSheet.png",
-                new SpriteSheet(AssetsPool.getTexture("assets/texture/spriteSheet.png")
-                        , 16, 16, 24, 0));
+        AssetsPool.addSpriteSheet("assets/texture/spriteSheets/decorationsAndBlocks.png",
+                new SpriteSheet(AssetsPool.getTexture("assets/texture/spriteSheets/decorationsAndBlocks.png")
+                        , 16, 16, 81, 0));
     }
 
 
@@ -69,7 +71,40 @@ public class LevelEditorScene extends Scene {
     @Override
     public void imGui() {
         ImGui.begin("Test Window");
-        ImGui.text("Some Random text");
+        ImVec2  windowPos = new ImVec2();
+        ImGui.getWindowPos(windowPos);
+        ImVec2 windowSize = new ImVec2();
+        ImGui.getWindowSize(windowSize);
+        ImVec2 itemSpacing = new ImVec2();
+        ImGui.getStyle().getItemSpacing(itemSpacing);
+        float windowEndPointX = windowPos.x + windowSize.x;
+
+        for (int i= 0; i< this.spriteSheet.getNumberOfSprites(); i++) {
+            Sprite sprite = this.spriteSheet.getSprite(i);
+            float spriteWidth = sprite.getWidth() *  4;
+            float spriteHeight = sprite.getHeight() * 4;
+
+            int id = sprite.getTextureID();
+            Vector2f[] textCords = sprite.getTexCord();
+
+            ImGui.pushID(i);
+            if(ImGui.imageButton(id, spriteWidth, spriteHeight, textCords[0].x, textCords[0].y, textCords[2].x, textCords[2].y)) {
+                System.out.println("Button " + i + " clicked");
+            }
+
+            ImGui.popID();
+
+            ImVec2 lastButtonPos = new ImVec2();
+            ImGui.getItemRectMax(lastButtonPos);
+            float lastButtonX2 = lastButtonPos.x;
+            float nextButtonX2 = lastButtonX2 + itemSpacing.x + spriteWidth;
+
+            if((i + 1 < this.spriteSheet.getNumberOfSprites()) && (nextButtonX2 < windowEndPointX)) {
+                ImGui.sameLine();
+            }
+        }
         ImGui.end();
     }
+
+
 }
